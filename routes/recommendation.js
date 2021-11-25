@@ -1,31 +1,60 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+var SpotifyWebApi = require("spotify-web-api-node");
 
-// handle /v1/recommendations
-router.get('/', function (req, res, next) {
-  // req.query => get all querystring
-  // req.params => get all paths (In this router, there is no params)
-
-  // response value <= all querystrings wrapping by javascript object
-  // res.send(req.query);
-
-  // Send Our songs to spotify server
-  // song1_url
-  // song2_url
-  console.log(req.query.songs)
-  console.log(req.query.songs[0])
-  console.log(req.query.songs[1])
-
-  // Algoritehms Part start
-  // Algoritehms Part end
-
-  res.send({
-    name: 'Beatles - Yellow submarine'
-  });
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId: "0d7012ae0619440296137343ac5c8bfd",
+  clientSecret: "f4ccf3419f7b485d8eb04b857118f4cd",
 });
+spotifyApi.clientCredentialsGrant().then(
+  function (data) {
+    // Save the access token so that it's used in future calls
+    spotifyApi.setAccessToken(data.body["access_token"]);
+  },
+  function (err) {
+    console.log("Something went wrong when retrieving an access token", err);
+  }
+);
+/* GET users listing. */
+router.get("/", function (req, res, next) {
+  console.log(req.query);
 
-router.post('/', function (req, res) {
-  res.send('Post Response');
+  spotifyApi.searchTracks(req.query.songs[0]).then(
+    function (data1) {
+      spotifyApi.searchTracks(req.query.songs[1]).then(
+        function (data2) {
+          spotifyApi
+            .getRecommendations({
+              seed_artists: [
+                data1.body.tracks.items[0].artists[0].id,
+                data2.body.tracks.items[0].artists[0].id,
+              ],
+              seed_tracks: [
+                data1.body.tracks.items[0].id,
+                data2.body.tracks.items[0].id,
+              ],
+            })
+            .then(
+              function (data) {
+                let recommendations = data.body;
+                // console.log(recommendations);
+                res.send(recommendations);
+              },
+              function (err) {
+                console.log("Something went wrong!", err);
+              }
+            );
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+    },
+    function (err) {
+      console.error(err);
+    }
+  );
 });
 
 module.exports = router;
