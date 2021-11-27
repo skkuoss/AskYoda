@@ -11,4 +11,4 @@ install:
 script:
   - npm start &
   - sleep 3
-  - npm teste
+  - npm test
