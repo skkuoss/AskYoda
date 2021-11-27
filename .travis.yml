@@ -3,7 +3,7 @@ node_js:
   - "12"
 branches:
   only:
-  - develop
+  - release
 env:
   - NODE_ENV=production PORT=3100
 install:
