@@ -1,11 +1,12 @@
 var express = require("express");
 var router = express.Router();
 var SpotifyWebApi = require("spotify-web-api-node");
+require("dotenv").config("../.env");
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
-  clientId: "clientId",
-  clientSecret: "clientSecret",
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
 });
 spotifyApi.clientCredentialsGrant().then(
   function (data) {
