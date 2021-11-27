@@ -5,7 +5,7 @@ branches:
   only:
   - release
 env:
-  - NODE_ENV=production PORT=3100
+  - NODE_ENV=test PORT=3100
 install:
   - npm install
 script:
