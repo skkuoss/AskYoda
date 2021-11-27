@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "12"
+branches:
+  only:
+  - develop
+env:
+  - NODE_ENV=production
+  - PORT=3100
+install:
+  - npm install
+script:
+  - npm start
+  - npm test

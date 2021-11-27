@@ -21,6 +21,9 @@ spotifyApi.clientCredentialsGrant().then(
 router.get("/", function (req, res, next) {
   console.log(req.query);
 
+  res.send('test');
+  return;
+
   spotifyApi.searchTracks(req.query.songs[0]).then(
     function (data1) {
       spotifyApi.searchTracks(req.query.songs[1]).then(
