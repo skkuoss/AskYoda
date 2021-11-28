@@ -1,11 +1,9 @@
 var express = require("express");
 var router = express.Router();
-const spotifyApi = require('../utils/spotify');
+const spotifyApi = require("../utils/spotify");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-  res.send('test');
-  return;
   spotifyApi.searchTracks(req.query.songs[0]).then(
     function (data1) {
       spotifyApi.searchTracks(req.query.songs[1]).then(
@@ -25,7 +23,6 @@ router.get("/", function (req, res, next) {
             .then(
               function (data) {
                 let recommendations = data.body;
-                // console.log(recommendations);
                 res.send(recommendations);
               },
               function (err) {
