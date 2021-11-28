@@ -1,33 +1,16 @@
 var express = require("express");
 var router = express.Router();
-var SpotifyWebApi = require("spotify-web-api-node");
-require("dotenv").config("../.env");
+const spotifyApi = require('../utils/spotify');
 
-// credentials are optional
-var spotifyApi = new SpotifyWebApi({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-});
-spotifyApi.clientCredentialsGrant().then(
-  function (data) {
-    // Save the access token so that it's used in future calls
-    spotifyApi.setAccessToken(data.body["access_token"]);
-  },
-  function (err) {
-    console.log("Something went wrong when retrieving an access token", err);
-  }
-);
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-  console.log(req.query);
-
   res.send('test');
   return;
-
   spotifyApi.searchTracks(req.query.songs[0]).then(
     function (data1) {
       spotifyApi.searchTracks(req.query.songs[1]).then(
         function (data2) {
+          console.log(data1.body.tracks.items[0].artists[0].id);
           spotifyApi
             .getRecommendations({
               seed_artists: [

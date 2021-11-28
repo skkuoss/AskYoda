@@ -5,6 +5,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+require("dotenv").config({
+  path: path.join(__dirname, `.env.${process.env.NODE_ENV || 'development'}`)
+});
+
 const app = express();
 
 app.use(cors());
