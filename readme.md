@@ -117,6 +117,11 @@ When we push to the develop branch, the Travis automatically performs the test. 
 
 ![Travis Build](.docs/travis01.png)
 ![Travis Build history](.docs/travis02.png)
+
+So when we create pull request from release branch to master branch, Github and Travis auto check about whether tests had passed or not.
+
+![Travis Test Result](.docs/travis-pull_request.png)
+
 ---
 
 Copyright ⓒ 2021 SKKU OSS Team 7 All Rights Reserved
