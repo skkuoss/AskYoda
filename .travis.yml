@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "12"
+branches:
+  only:
+  - develop
+env:
+  - NODE_ENV=test PORT=3100
+install:
+  - npm install
+script:
+  - npm start &
+  - sleep 3
+  - npm test
+after_success:
+  - ./travis-merge.sh
