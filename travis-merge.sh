@@ -4,4 +4,4 @@ git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* || exit
 git fetch --all || exit
 git checkout release || exit
 git rebase develop || exit
-git push @github.com/">https://${GITHUB_TOKEN}@github.com/skkuoss/AskYoda.git
+git push https://${GITHUB_TOKEN}@github.com/skkuoss/AskYoda.git
