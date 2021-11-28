@@ -28,8 +28,14 @@ $ git clone https://github.com/skkuoss/AskYoda.git
 ```bash
 $ npm install
 ```
+### 3-1. Create secret environment variables
+```shell
+$ touch .env.development
+```
+You have to export CLIENT_ID and CLIENT_SECRET due to Spotify.
 
-### 3-1. Start development server
+You can certificate it from Spotify API page. Visit [`here`](https://developer.spotify.com/dashboard/applications) to get more information.
+### 3-2. Start development server
 
 ```shell
 $ npm start
@@ -37,7 +43,7 @@ $ npm start
 
 After run server Access [`http://localhost:3100`](http://localhost:3100)
 
-### 3-2. Start production server
+### 3-3. Start production server
 ```shell
 $ export NODE_ENV=production
 ```
